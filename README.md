@@ -4,6 +4,7 @@
 ## Bash
 
 #### In Bash, how do I list all text files in the current directory (excluding subdirectories) that have been modified in the last month
+SOLUTION: in Bash folder, in bash solution file
 
 ## Python
 
@@ -11,9 +12,12 @@
     ○ Input: nums = [11, 5, 2, 5, 3, 7, 101, 18]
     ○ Output: 4
     ○ Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+SOLUTION: Function is in longestSequence.py, which can be run using main.py
 
 #### 2) Write a script to produce a list of every file under
     https://gentoo.osuosl.org/distfiles/
+SOLUTION: For this required functions are in listAllFiles.py, which can be run using main.py too.
+The output file is also attached as all_files_listed
 
 ## SQL
       We have: <br>
@@ -27,3 +31,4 @@
       … …<br>
       Our sampling strategy is to order the images in decreasing order of scores and sample every 3rd image starting with the first from the beginning until we get 10k positive samples. And we would like to do the same in the other direction, starting from the end to get 10k negative samples. <br>
       Task: Write a SQL query that performs this sampling and creates the expected output ordered by image_id with integer columns image_id, weak_label.
+SOLUTION: in SQL folder, in sql solution file
