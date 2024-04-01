@@ -1,0 +1,51 @@
+The following query will provide the positive and negative lables by:
+   sorting all rows in desc order of scores to get 1 as weak lable
+   picking all rows where the modulus(row_number,3) =1 i.e 1, 4, 7...
+   then finding cumulative count from begining of the result
+   then extracting only first 10,000 rows
+   repeating the same for asc order of scores to get 0 as weal lable
+   unioniong the result 
+   finally ordering by image_number
+  
+
+select
+ 	image_id, 
+  	weak_label
+from
+(
+  	select
+      		image_id, 
+      		case when mod(sorted_score_order,3) = 1 then 1 end as weak_label,
+      		count() over (order by sorted_score_desc_order ROWS BETWEEN UNBOUNDED PRECEDING AND current row) as cum_count
+  	from (
+    			select
+    			row_number() over (order by scores desc) as scores_desc_order,
+    			image_id,
+    			score
+    			from 
+    				image_scores
+  	)	as table_1
+   	where 
+		cum_count = 10000 and weak_label =1
+
+union all
+
+select
+		image_id, 
+		case when mod(sorted_score_order,3) then 0 end as weak_label,
+		count() over (order by sorted_score_asc_order ROWS BETWEEN UNBOUNDED PRECEDING AND current row) as cum_count
+from (
+      		select
+      		row_number() over (order by scores) as scores_asc_order,
+      		image_id,
+      		score
+      		from 
+      			image_scores
+	)	as table_2
+where 
+  		cum_count = 10000 and weak_label = 0
+  
+) as table_3
+
+order by
+image_id;

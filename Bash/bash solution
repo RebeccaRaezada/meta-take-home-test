@@ -1,0 +1,10 @@
+
+Ans: 
+    find . -type f -mtime -30 -ls | grep txt
+
+This cmd can be explained as follows:
+find . --> this will look for files in current folder
+-type f --> this will only look for files not folders/subfolder
+-mtime -30 -->this will set the timeframe of files from last 30 days only
+-ls --> will list all such files
+grep txt --> will only show text files
